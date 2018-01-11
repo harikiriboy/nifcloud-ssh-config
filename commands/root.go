@@ -25,6 +25,7 @@ Host {{.InstanceID}}
 {{end}}
 `))
 
+// DescribeInstancesResponse is strcut of DescribeInstancesResponse
 type DescribeInstancesResponse struct {
 	RequestID      string `xml:"requestId"`
 	ReservationSet struct {
@@ -32,18 +33,20 @@ type DescribeInstancesResponse struct {
 	} `xml:"reservationSet"`
 }
 
+// ReservationSetItem is struct of ReservationSetItem
 type ReservationSetItem struct {
 	InstancesSet struct {
 		Item struct {
 			InstanceID       string `xml:"instanceId"`
 			IPAddress        string `xml:"ipAddress"`
-			PrivateIpAddress string `xml:"privateIpAddress"`
+			PrivateIPAddress string `xml:"privateIpAddress"`
 			KeyName          string `xml:"keyName"`
 			Platform         string `xml:"platform"`
 		} `xml:"item"`
 	} `xml:"instancesSet"`
 }
 
+// RootCmd is root command
 var RootCmd = &cobra.Command{
 	Short: "A very simple tool that generates SSH config file using NIFCLOUD Comoutigng API.",
 	Run: func(cmd *cobra.Command, args []string) {
@@ -53,7 +56,7 @@ var RootCmd = &cobra.Command{
 		regionNames := viper.GetStringSlice("region")
 
 		if len(regionNames) == 0 {
-			for name, _ := range nifcloud.Regions {
+			for name := range nifcloud.Regions {
 				regionNames = append(regionNames, name)
 			}
 		}
@@ -155,7 +158,7 @@ func generateSSHConfig(describeInstancesResponse string) (sshConfig string, err 
 		instanceID = viper.GetString("prefix") + item.InstancesSet.Item.InstanceID
 
 		if item.InstancesSet.Item.IPAddress == "" || viper.GetBool("private") {
-			ipaddress = item.InstancesSet.Item.PrivateIpAddress
+			ipaddress = item.InstancesSet.Item.PrivateIPAddress
 		} else {
 			ipaddress = item.InstancesSet.Item.IPAddress
 		}

@@ -16,6 +16,7 @@ type credential struct {
 	credentials awsauth.Credentials
 }
 
+// NewCredential returns Credential
 func NewCredential(accesskey, secretkey string) Credential {
 	if accesskey == "" {
 		accesskey = os.Getenv("NIFCLOUD_ACCESS_KEY_ID")

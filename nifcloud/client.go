@@ -19,6 +19,7 @@ type client struct {
 	debug      bool
 }
 
+// NewClient returns Client interface
 func NewClient(regionName, accessKey, secretKey string, debug bool) Client {
 	return &client{
 		region:     NewRegion(regionName),
