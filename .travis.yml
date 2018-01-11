@@ -1,0 +1,13 @@
+language: go
+sudo: false
+go:
+  - 1.9
+cache:
+  directories:
+    - vendor
+install:
+  - make dep
+script:
+  - make
+after_success:
+- travis_retry make coveralls
