@@ -5,7 +5,7 @@
 
 ## About
 
-A very simple tool that generates SSH config file using NIFCLOUD Comoutigng API.
+A very simple tool that generates SSH config file using NIFCLOUD Computing API.
 
 ## Install
 
