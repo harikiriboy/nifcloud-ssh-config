@@ -10,4 +10,5 @@ install:
 script:
   - make
 after_success:
-- travis_retry make coveralls
+  - travis_retry make coveralls
+  - test -n "$TRAVIS_TAG" && curl -sL https://git.io/goreleaser | bash
